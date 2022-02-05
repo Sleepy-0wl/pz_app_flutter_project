@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "389789402475",
+    "project_id": "prvenstvozagorjaapp",
+    "storage_bucket": "prvenstvozagorjaapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:389789402475:android:4953e642008c40a85d782e",
+        "android_client_info": {
+          "package_name": "com.example.pz_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "389789402475-gf98pectudirohaq0nvc9p3li27mki6n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBu8h_oc-jGpg4SWkotMu6Mc4ksqMka2ww"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "389789402475-gf98pectudirohaq0nvc9p3li27mki6n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
