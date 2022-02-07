@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../screens/event_screen.dart';
 import '../models/event.dart';
 
+// Widget for displaying event data in a card in main_screen.dart.
 class MainScreenCard extends StatelessWidget {
   final Event _event;
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pz_app/data_providers/user_data.dart';
 
+// Widget for logging in existing users. Accessed in auth_screen.dart.
 class LogIn extends StatefulWidget {
   const LogIn({Key? key}) : super(key: key);
 
@@ -68,7 +69,25 @@ class _LogInState extends State<LogIn> {
             bool _isValid = _formKey.currentState!.validate();
             if (_isValid) {
               _formKey.currentState!.save();
-              logUserIn(_email, _password);
+              logUserIn(_email, _password).catchError((error) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    backgroundColor: Colors.grey,
+                    content: SizedBox(
+                      height: 20,
+                      child: Center(
+                        child: Text(
+                          'Prijava nije uspjela!',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              });
             }
           },
           child: const Text(

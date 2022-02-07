@@ -1,3 +1,5 @@
+// Model for event results.
+
 class EventResult {
   String resultID;
   String userID;

@@ -6,6 +6,10 @@ import '../data_providers/user_data.dart';
 import '../data_providers/entry_data.dart';
 import '../data_providers/result_data.dart';
 
+// Screen for entering new results based on entries of finished events.
+// Can be opened from IconButton on ListTile in event_list_screen.dart but only if you press on "Završeni" in drawer.
+// Only visible to admin users.
+// All logic contained in this screen, not separated in another file.
 class ResultInputScreen extends StatefulWidget {
   final String _eventID;
   final DateTime _eventDate;
@@ -57,6 +61,7 @@ class _ResultInputScreenState extends State<ResultInputScreen> {
               child: SizedBox(
                 child: Column(
                   children: [
+                    // Dropdown where user can choose race class for which he wants to see entries.
                     DropdownButtonFormField(
                         dropdownColor:
                             Theme.of(context).scaffoldBackgroundColor,
@@ -81,6 +86,7 @@ class _ResultInputScreenState extends State<ResultInputScreen> {
                     const SizedBox(
                       height: 25,
                     ),
+                    // After chosen race class, all entries for that race class is fetched from Firebase and stored into another Dropdown.
                     FutureBuilder<List<EventEntry>>(
                         future: getEventEntries(widget._eventID, _classesValue),
                         builder: (context, snapshot) {
@@ -142,6 +148,8 @@ class _ResultInputScreenState extends State<ResultInputScreen> {
                     const SizedBox(
                       height: 25,
                     ),
+                    // Depending on value of _isThereEntry bool, this TextFormField is visible or not.
+                    // If there is no entry, there is nothing to enter so it is now shown.
                     Visibility(
                       visible: _isThereEntry,
                       maintainSize: true,
@@ -175,6 +183,8 @@ class _ResultInputScreenState extends State<ResultInputScreen> {
                     const SizedBox(
                       height: 25,
                     ),
+                    // Depending on value of _isThereEntry bool, this TextFormField is visible or not.
+                    // If there is no entry, there is nothing to enter so it is now shown.
                     Visibility(
                       visible: _isThereEntry,
                       maintainSize: true,
@@ -222,7 +232,25 @@ class _ResultInputScreenState extends State<ResultInputScreen> {
                             _racePosition,
                             _racePoints,
                             _classesValue,
-                          );
+                          ).catchError((error) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                backgroundColor: Colors.grey,
+                                content: SizedBox(
+                                  height: 20,
+                                  child: Center(
+                                    child: Text(
+                                      'Unos nije uspio!',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          });
                         }
                       },
                       child: const Text(

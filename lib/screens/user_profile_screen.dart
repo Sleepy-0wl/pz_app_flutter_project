@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import '../widgets/user_entries.dart';
 import '../widgets/user_profile_data.dart';
 
+// This screen displays data about user with given id.
+// Can be opened from appbar_profile.dart (PopupMenuButton) or by pressing on any user name in event_data_table.dart.
+// It is separated into two widgets. UserProfileData displays users data.
+// UserEntries displays users entries and results.
 class UserProfileScreen extends StatefulWidget {
   final String _userID;
 

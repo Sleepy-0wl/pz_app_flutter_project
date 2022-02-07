@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import '../widgets/sign_up.dart';
 import '../widgets/log_in.dart';
 
+// Base screen for authentication. By default gets LogIn widget as a child.
+// Depending on the state of _isSignup boolean, screen switches between LogIn and Signup.
+// Also some height parameters change depending on the _isSignup state, for better UX.
+
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
 

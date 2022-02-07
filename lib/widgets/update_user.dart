@@ -6,6 +6,7 @@ import '../widgets/user_image_picker.dart';
 import '../data_providers/user_data.dart';
 import '../models/user.dart';
 
+// Widget with logic for updating users info. Accessed in user_update_screen.dart.
 class UpdateUser extends StatefulWidget {
   final AppUser _user;
 
@@ -178,7 +179,25 @@ class _UpdateUserState extends State<UpdateUser> {
                 _selectedDate,
                 _country,
                 _userImageFile,
-              );
+              ).catchError((error) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    backgroundColor: Colors.grey,
+                    content: SizedBox(
+                      height: 20,
+                      child: Center(
+                        child: Text(
+                          'Promjena nije uspjela!',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              });
             }
             Navigator.of(context).pop();
             Navigator.of(context).pop();

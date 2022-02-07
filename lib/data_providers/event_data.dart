@@ -5,14 +5,18 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 import '../models/event.dart';
 
+// Methods for communicating with Firebase for data about stored events.
+
 CollectionReference _events = FirebaseFirestore.instance.collection('events');
 
+// This method adds new event in the Firebase storage. Data is modeled after class in event.dart file.
 Future<void> addNewEvent(
   File image,
   String location,
   DateTime selectedDate,
   List<String> raceClasses,
 ) async {
+  // Creates reference to path where image will be stored. Name of the image is combination of events data.
   final ref = FirebaseStorage.instance
       .ref()
       .child('event_images')
@@ -32,6 +36,7 @@ Future<void> addNewEvent(
   });
 }
 
+// This method gets specific event from Firebase defined by given id.
 Future<Event> getEventFromFirebase(String id) async {
   DocumentSnapshot newSnapshot =
       await _events.doc(id).get().catchError((error) {});
@@ -46,6 +51,7 @@ Future<Event> getEventFromFirebase(String id) async {
   return newUser;
 }
 
+// This method returns list of all events that match given bool argument (is event finished or not).
 Future<List<Event>> getEvents(bool finished) async {
   List<Event> newEvents = [];
   await _events
@@ -69,6 +75,7 @@ Future<List<Event>> getEvents(bool finished) async {
   return newEvents;
 }
 
+// This method returns single event that is not yet finished and is closest to current date.
 Future<Event> getSoonestUnfinished() async {
   return await _events
       .where('isFinished', isEqualTo: false)
@@ -87,6 +94,7 @@ Future<Event> getSoonestUnfinished() async {
   }).catchError((error) {});
 }
 
+// This method returns single event that is finished and is closest to the current date.
 Future<Event> getLatestFinished() async {
   return await _events
       .where('isFinished', isEqualTo: true)

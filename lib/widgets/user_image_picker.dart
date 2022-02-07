@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+// This widget is for picking image for new event. Accessed in sign_up.dart and update_user.dart.
+// It uses image_picker package and allows user to pick image from gallery or take a new photo with camera.
 class UserImagePicker extends StatefulWidget {
   const UserImagePicker(this.imagePickFn, {Key? key}) : super(key: key);
 

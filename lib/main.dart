@@ -8,11 +8,11 @@ import './screens/auth_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(const PrvenstvoZagorja());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class PrvenstvoZagorja extends StatelessWidget {
+  const PrvenstvoZagorja({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +24,9 @@ class MyApp extends StatelessWidget {
         cardColor: const Color.fromRGBO(225, 225, 225, 1),
         scaffoldBackgroundColor: const Color.fromRGBO(45, 45, 45, 1),
       ),
+      // StreamBuilder which listens to changes in authentication.
+      // If user is authenticated builder returns apps main screen and if not, builder returns authentication screen.
+      // In case of an error, it returns text widget saying there's some error.
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (ctx, snapshot) {

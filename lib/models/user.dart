@@ -1,3 +1,5 @@
+// Model for user data.
+
 class AppUser {
   final String id;
   final String email;

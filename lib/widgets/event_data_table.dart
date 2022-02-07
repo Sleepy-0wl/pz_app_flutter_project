@@ -8,6 +8,10 @@ import '../models/event_entry.dart';
 import '../models/event_result.dart';
 import '../screens/user_profile_screen.dart';
 
+// DataTable which is displayed in event_screen.dart
+// UI and data retrieving really dependant on _isFinished argument.
+// If _isFinished is true, all data will be received from result_data.dart and UI will be adjusted for results.
+// If _isFinished is false, all data will be received from entry_data.dart, UI will be adjusted for entries.
 class EventDataTable extends StatelessWidget {
   final String _eventID;
   final String _raceClass;

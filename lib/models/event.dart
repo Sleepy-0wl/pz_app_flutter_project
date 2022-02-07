@@ -1,3 +1,5 @@
+// Model for event data.
+
 class Event {
   final String id;
   final DateTime date;

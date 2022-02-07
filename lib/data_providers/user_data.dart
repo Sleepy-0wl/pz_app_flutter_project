@@ -6,8 +6,12 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 import '../models/user.dart';
 
+// Methods for communicating with Firebase for data about registered users.
+
 CollectionReference users = FirebaseFirestore.instance.collection('users');
 
+// This method adds new user to the Firebase storage and simultaneously registers user in Firebase Authentication.
+// Data is modeled after class in user.dart file.
 Future<void> addNewUser(
   String email,
   String password,
@@ -20,8 +24,11 @@ Future<void> addNewUser(
   final _auth = FirebaseAuth.instance;
   UserCredential _authResult;
 
+  // Creates new user in Firebase Auth
   _authResult = await _auth.createUserWithEmailAndPassword(
       email: email, password: password);
+
+  // Creates reference to path where image will be stored. Name of the image is users id.
   final ref = FirebaseStorage.instance
       .ref()
       .child('user_images')
@@ -29,6 +36,9 @@ Future<void> addNewUser(
 
   await ref.putFile(image).whenComplete(() => null);
   final imageUrl = await ref.getDownloadURL();
+
+  // Adds new user to storage.
+  // .doc().set() is used instead of .add() so that same userID can be used in both Firebase Auth and as document id in storage.
   users.doc(_authResult.user!.uid).set({
     'email': email,
     'name': name,
@@ -40,6 +50,7 @@ Future<void> addNewUser(
   }).catchError((error) {});
 }
 
+// Method for logging user in.
 Future<void> logUserIn(String email, String password) async {
   final _auth = FirebaseAuth.instance;
   UserCredential _authResult = await _auth
@@ -47,6 +58,7 @@ Future<void> logUserIn(String email, String password) async {
       .catchError((error) {});
 }
 
+// Method that reads data for single user specified by id.
 Future<AppUser> readUserData(String id) async {
   DocumentSnapshot newSnapshot =
       await users.doc(id).get().catchError((error) {});
@@ -63,6 +75,7 @@ Future<AppUser> readUserData(String id) async {
   return newUser;
 }
 
+// Method for updating users data
 Future<void> updateUserData(
   String id,
   String name,

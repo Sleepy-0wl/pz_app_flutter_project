@@ -7,6 +7,7 @@ import '../widgets/event_image_picker.dart';
 import '../widgets/event_race_classes_picker.dart';
 import '../data_providers/event_data.dart';
 
+// Screen for entering new event. Can be opened from app_drawer.dart but only visible to admin users.
 class NewEventScreen extends StatefulWidget {
   const NewEventScreen({Key? key}) : super(key: key);
 
@@ -123,7 +124,26 @@ class _NewEventScreenState extends State<NewEventScreen> {
                     List<String> lista = getClasses();
                     try {
                       addNewEvent(_userImageFile, _locationController.text,
-                          _selectedDate, lista);
+                              _selectedDate, lista)
+                          .catchError((error) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            backgroundColor: Colors.grey,
+                            content: SizedBox(
+                              height: 20,
+                              child: Center(
+                                child: Text(
+                                  'Dodavanje novog eventa nije uspjelo!',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      });
                       Navigator.pop(context);
                     } catch (error) {
                       ScaffoldMessenger.of(context).showSnackBar(

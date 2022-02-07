@@ -6,6 +6,9 @@ import '../screens/new_event_screen.dart';
 import '../data_providers/user_data.dart';
 import '../models/user.dart';
 
+// Drawer widget of this app.
+// Contains ListView of tiles which lead to event_list_screen.dart.
+// If user is admin, tile which leads to new_event_screen.dart is also visible.
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);
 

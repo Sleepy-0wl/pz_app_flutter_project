@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../data_providers/entry_data.dart';
 
+// Widget for making new entry for a specific event and a chosen race class.
+// Accessed in entry_screen.dart.
 class NewEntry extends StatefulWidget {
   final String _eventID;
   final List<String> _raceClasses;
@@ -120,7 +122,26 @@ class _NewEntryState extends State<NewEntry> {
             if (_isValid) {
               _formKey.currentState!.save();
               addNewEntry(widget._eventID, _dropDownValue, _raceNumber,
-                  _vehicle, widget._eventDate);
+                      _vehicle, widget._eventDate)
+                  .catchError((error) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    backgroundColor: Colors.grey,
+                    content: SizedBox(
+                      height: 20,
+                      child: Center(
+                        child: Text(
+                          'Prijava nije uspjela!',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              });
             }
             Navigator.pop(context);
           },

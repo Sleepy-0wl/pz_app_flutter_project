@@ -1,3 +1,5 @@
+// Model for event entries.
+
 class EventEntry {
   final String entryID;
   final String userID;

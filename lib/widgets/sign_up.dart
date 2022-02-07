@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../widgets/user_image_picker.dart';
 import '../data_providers/user_data.dart';
 
+// Widget for signing up new user. Accessed in auth_screen.dart.
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
@@ -200,7 +201,25 @@ class _SignUpState extends State<SignUp> {
                 _selectedDate,
                 _country,
                 _userImageFile,
-              );
+              ).catchError((error) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    backgroundColor: Colors.grey,
+                    content: SizedBox(
+                      height: 20,
+                      child: Center(
+                        child: Text(
+                          'Registracija nije uspjela!',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              });
             }
           },
           child: const Text(

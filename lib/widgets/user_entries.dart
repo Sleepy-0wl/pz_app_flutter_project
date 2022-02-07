@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../models/event_entry.dart';
@@ -5,6 +6,7 @@ import '../models/event_result.dart';
 import '../data_providers/entry_data.dart';
 import '../data_providers/result_data.dart';
 
+// Widget that displays entries and results of given user. Accessed in user_profile_screen.dart.
 class UserEntries extends StatefulWidget {
   final String _userID;
 
@@ -76,13 +78,19 @@ class _UserEntriesState extends State<UserEntries> {
                                   title: Text(
                                       "${entries[index].eventDate.day}.${entries[index].eventDate.month}.${entries[index].eventDate.year}.    " +
                                           entries[index].raceClass),
-                                  trailing: IconButton(
-                                    icon: const Icon(Icons.delete),
-                                    onPressed: () {
-                                      deleteEntry(entries[index].entryID);
-                                      setState(() {});
-                                    },
-                                  ),
+                                  trailing: DateTime.now().isBefore(
+                                              entries[index].eventDate) &&
+                                          entries[index].userID ==
+                                              FirebaseAuth
+                                                  .instance.currentUser!.uid
+                                      ? IconButton(
+                                          icon: const Icon(Icons.delete),
+                                          onPressed: () {
+                                            deleteEntry(entries[index].entryID);
+                                            setState(() {});
+                                          },
+                                        )
+                                      : const SizedBox.shrink(),
                                 );
                               });
                         } else {

@@ -5,6 +5,7 @@ import '../models/user.dart';
 import '../data_providers/user_data.dart';
 import '../screens/user_update_screen.dart';
 
+// Widget that displays data of given user in a card. Accessed in user_profile_screen.dart.
 class UserProfileData extends StatefulWidget {
   final String _userID;
 

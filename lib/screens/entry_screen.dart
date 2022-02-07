@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../widgets/appbar_profile.dart';
 import '../widgets/new_entry.dart';
 
+// Screen that opens when user wants to make a new entry. Opened from event_screen.dart.
+
 class EntryScreen extends StatefulWidget {
   final String _eventID;
   final List<String> _raceClasses;

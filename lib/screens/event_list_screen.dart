@@ -6,6 +6,9 @@ import '../screens/result_input_screen.dart';
 import '../models/event.dart';
 import '../data_providers/event_data.dart';
 
+// This screen displays list of events. Called from app_drawer.dart.
+// Receives two bool arguments. _finished for adjusting UI and data from Firebase according to information is event finished or not.
+// _isAdmin shows if current user is admin and accordingly UI adjusts.
 class EventListScreen extends StatelessWidget {
   final bool _finished;
   final bool _isAdmin;

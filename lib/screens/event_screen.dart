@@ -5,6 +5,10 @@ import '../widgets/event_data_table.dart';
 import '../screens/entry_screen.dart';
 import '../models/event.dart';
 
+// Screen that displays info about given event. Can be opened from EventListScreen or MainScreen/MainScreenCard.
+// If event is not finished, users can register for the event by pressing on ElevatedButton which is displayed conditionaly.
+// By choosing the race class in DropdownButton, data for that race class is displayed in DataTable (if there is any).
+// Logic for that DataTable is contained in event_data_table.dart widget.
 class EventScreen extends StatefulWidget {
   final Event _event;
 
@@ -56,31 +60,30 @@ class _EventScreenState extends State<EventScreen> {
           const SizedBox(
             height: 20,
           ),
-          _thisEvent.isFinished
-              ? const SizedBox.shrink()
-              : ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EntryScreen(
-                            _thisEvent.id, _thisEvent.classes, _thisEvent.date),
-                      ),
-                    );
-                  },
-                  child: const Text(
-                    'Prijava',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
+          if (!_thisEvent.isFinished)
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EntryScreen(
+                        _thisEvent.id, _thisEvent.classes, _thisEvent.date),
                   ),
-                  style: ElevatedButton.styleFrom(
-                    fixedSize: const Size(300, 50),
-                    elevation: 5,
-                  ),
+                );
+              },
+              child: const Text(
+                'Prijava',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
                 ),
+              ),
+              style: ElevatedButton.styleFrom(
+                fixedSize: const Size(300, 50),
+                elevation: 5,
+              ),
+            ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(

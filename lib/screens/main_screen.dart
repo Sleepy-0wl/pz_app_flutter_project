@@ -6,6 +6,9 @@ import '../widgets/app_drawer.dart';
 import '../models/event.dart';
 import '../data_providers/event_data.dart';
 
+// Main screen that is shown after successful authentication. Contains two custom card widgets(main_screen_card.dart).
+// First card contains data about upcoming event, second card contains data about most recently finished event.
+// Pressing on the card opens event_screen.dart of that event.
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
 

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../race_classes.dart';
 
+// This widget allows user to pick race classes for the new event. Accessed in new_event_screen.dart.
+// It's a ListView with checkboxes as visual confirmation of chosen race class.
 class EventRaceClassesPicker extends StatefulWidget {
   const EventRaceClassesPicker({Key? key}) : super(key: key);
 

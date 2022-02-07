@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import '../widgets/update_user.dart';
 import '../models/user.dart';
 
+// Screen for updating users data.
+// Can be opened from user_profile_data.dart but only if you are watching your profile.
+// All logic contained in UpdateUser widget.
 class UserUpdateScreen extends StatefulWidget {
   final AppUser _user;
 

@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../screens/user_profile_screen.dart';
 
+// Contains actions of apps AppBars.
+// You can either see your profile (opens user_profile_screen.dart) or log out.
 class AppBarProfile extends StatelessWidget {
   const AppBarProfile({Key? key}) : super(key: key);
 

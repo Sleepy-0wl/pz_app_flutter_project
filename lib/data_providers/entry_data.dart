@@ -3,11 +3,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../models/event_entry.dart';
 
+// Methods for communicating with Firebase for data about registered entries to the event(s).
+
 CollectionReference _entries = FirebaseFirestore.instance.collection('entries');
 
 User userAuth = FirebaseAuth.instance.currentUser as User;
 String userID = userAuth.uid.toString();
 
+// This method adds new event entry into the Firebase. Data is modeled after class in event_entry.dart file.
 Future<void> addNewEntry(
   String eventID,
   String raceClass,
@@ -28,6 +31,7 @@ Future<void> addNewEntry(
   });
 }
 
+//This method returns list of all entries from Firebase for specific event and for specific race class in that event.
 Future<List<EventEntry>> getEventEntries(
   String eventID,
   String raceClass,
@@ -57,6 +61,7 @@ Future<List<EventEntry>> getEventEntries(
   return eventEntries;
 }
 
+//This method returns all the entries chosen user has.
 Future<List<EventEntry>> getUserEntries(String _id) async {
   List<EventEntry> userEntries = [];
   await _entries
@@ -82,6 +87,7 @@ Future<List<EventEntry>> getUserEntries(String _id) async {
   return userEntries;
 }
 
+//This method deletes chosen entry.
 Future<void> deleteEntry(String entryID) async {
   await _entries.doc(entryID).delete().catchError((error) {});
 }
