@@ -42,10 +42,16 @@ class _NewEntryState extends State<NewEntry> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Odaberite klasu:'),
+                  const Text(
+                    'Odaberite klasu:',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                   SizedBox(
                     width: 250,
                     child: DropdownButtonFormField<String>(
+                      dropdownColor: Theme.of(context).scaffoldBackgroundColor,
                       isExpanded: true,
                       menuMaxHeight: 320,
                       value: _dropDownValue,
@@ -53,7 +59,12 @@ class _NewEntryState extends State<NewEntry> {
                           .map<DropdownMenuItem<String>>((String e) {
                         return DropdownMenuItem<String>(
                           value: e,
-                          child: Text(e),
+                          child: Text(
+                            e,
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
                         );
                       }).toList(),
                       onChanged: (String? newValue) {
@@ -69,6 +80,9 @@ class _NewEntryState extends State<NewEntry> {
                 height: 30,
               ),
               TextFormField(
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
                 validator: (value) {
                   if (value == null) {
                     return 'Unesite broj';
@@ -82,6 +96,9 @@ class _NewEntryState extends State<NewEntry> {
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Unesite željeni startni broj',
+                  labelStyle: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
                 onSaved: (newValue) {
                   _raceNumber = int.tryParse(newValue!)!;
@@ -91,6 +108,9 @@ class _NewEntryState extends State<NewEntry> {
                 height: 30,
               ),
               TextFormField(
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
                 validator: (value) {
                   if (value == null || value.length < 3) {
                     return 'Unesite valjanu vrijednost vozila';
@@ -101,6 +121,9 @@ class _NewEntryState extends State<NewEntry> {
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Unesite vaše vozilo',
+                  labelStyle: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
                 onSaved: (String? newValue) {
                   _vehicle = newValue as String;

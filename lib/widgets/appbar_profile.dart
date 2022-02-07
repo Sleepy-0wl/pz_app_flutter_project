@@ -39,7 +39,10 @@ class AppBarProfile extends StatelessWidget {
           child: TextButton.icon(
             onPressed: () {
               _signOut();
-              Navigator.pop(context);
+              Navigator.popUntil(
+                context,
+                ModalRoute.withName('/'),
+              );
             },
             icon: const Icon(Icons.door_back_door),
             label: const Text('Odjava'),

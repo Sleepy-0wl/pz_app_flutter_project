@@ -28,7 +28,12 @@ class _EntryScreenState extends State<EntryScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: const Center(
-            child: Text('Prijava'),
+            child: Text(
+              'Prijava',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
           actions: const [
             AppBarProfile(),
