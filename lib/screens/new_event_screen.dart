@@ -122,36 +122,29 @@ class _NewEventScreenState extends State<NewEventScreen> {
                 ElevatedButton(
                   onPressed: () {
                     List<String> lista = getClasses();
-                    try {
-                      addNewEvent(_userImageFile, _locationController.text,
-                              _selectedDate, lista)
-                          .catchError((error) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            backgroundColor: Colors.grey,
-                            content: SizedBox(
-                              height: 20,
-                              child: Center(
-                                child: Text(
-                                  'Dodavanje novog eventa nije uspjelo!',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                  ),
+
+                    addNewEvent(_userImageFile, _locationController.text,
+                            _selectedDate, lista)
+                        .catchError((error) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          backgroundColor: Colors.grey,
+                          content: SizedBox(
+                            height: 20,
+                            child: Center(
+                              child: Text(
+                                'Dodavanje novog eventa nije uspjelo!',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
                                 ),
                               ),
                             ),
                           ),
-                        );
-                      });
-                      Navigator.pop(context);
-                    } catch (error) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Došlo je do greške'),
                         ),
                       );
-                    }
+                    });
+                    Navigator.pop(context);
                   },
                   child: const Text(
                     'Stvori',
