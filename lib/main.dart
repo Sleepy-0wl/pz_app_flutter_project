@@ -42,6 +42,7 @@ class PrvenstvoZagorja extends StatelessWidget {
         },
       ),
       debugShowCheckedModeBanner: false,
+      initialRoute: '/',
     );
   }
 }
