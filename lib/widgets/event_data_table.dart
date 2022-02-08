@@ -116,13 +116,17 @@ class EventDataTable extends StatelessWidget {
                                         ),
                                       ),
                                     );
-                                  } else {
+                                  } else if (snapshot.hasError) {
                                     return const Text(
                                       'Greška',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 16,
                                       ),
+                                    );
+                                  } else {
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
                                     );
                                   }
                                 }),
