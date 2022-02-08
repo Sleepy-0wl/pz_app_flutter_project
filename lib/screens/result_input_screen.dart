@@ -98,6 +98,8 @@ class _ResultInputScreenState extends State<ResultInputScreen> {
                             });
                             EventEntry _entryValue = snapshot.data!.first;
                             return DropdownButtonFormField(
+                                dropdownColor:
+                                    Theme.of(context).scaffoldBackgroundColor,
                                 value: _entryValue,
                                 items: snapshot.data!
                                     .map<DropdownMenuItem<EventEntry>>(
@@ -109,11 +111,21 @@ class _ResultInputScreenState extends State<ResultInputScreen> {
                                         builder: (context, snapshot) {
                                           if (snapshot.hasData) {
                                             _userID = item.userID;
-                                            return Text(snapshot.data!.name +
-                                                ' ' +
-                                                snapshot.data!.surname);
+                                            return Text(
+                                              snapshot.data!.name +
+                                                  ' ' +
+                                                  snapshot.data!.surname,
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            );
                                           } else if (snapshot.hasError) {
-                                            return const Text('Greška');
+                                            return const Text(
+                                              'Greška',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            );
                                           } else {
                                             return const Center(
                                               child:
