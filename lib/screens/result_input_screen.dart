@@ -25,9 +25,9 @@ class ResultInputScreen extends StatefulWidget {
 
 class _ResultInputScreenState extends State<ResultInputScreen> {
   final _formKey = GlobalKey<FormState>();
+  String _userID = '';
   String _classesValue = '';
   bool _isThereEntry = false;
-  String _userID = '';
   int _racePosition = 0;
   int _racePoints = 0;
 
@@ -96,21 +96,18 @@ class _ResultInputScreenState extends State<ResultInputScreen> {
                                 _isThereEntry = true;
                               });
                             });
-                            EventEntry _entryValue = snapshot.data!.first;
                             return DropdownButtonFormField(
                                 dropdownColor:
                                     Theme.of(context).scaffoldBackgroundColor,
-                                value: _entryValue,
+                                value: snapshot.data!.first.userID,
                                 items: snapshot.data!
-                                    .map<DropdownMenuItem<EventEntry>>(
-                                        (EventEntry item) {
-                                  return DropdownMenuItem<EventEntry>(
-                                    value: item,
+                                    .map<DropdownMenuItem<String>>((item) {
+                                  return DropdownMenuItem<String>(
+                                    value: item.userID,
                                     child: FutureBuilder<AppUser>(
                                         future: readUserData(item.userID),
                                         builder: (context, snapshot) {
                                           if (snapshot.hasData) {
-                                            _userID = item.userID;
                                             return Text(
                                               snapshot.data!.name +
                                                   ' ' +
@@ -135,9 +132,9 @@ class _ResultInputScreenState extends State<ResultInputScreen> {
                                         }),
                                   );
                                 }).toList(),
-                                onChanged: (EventEntry? newValue) {
+                                onChanged: (String? newValue) {
                                   setState(() {
-                                    _entryValue = newValue!;
+                                    _userID = newValue!;
                                   });
                                 });
                           } else {
@@ -244,7 +241,25 @@ class _ResultInputScreenState extends State<ResultInputScreen> {
                             _racePosition,
                             _racePoints,
                             _classesValue,
-                          ).catchError((error) {
+                          ).then((_) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                backgroundColor: Colors.grey,
+                                content: SizedBox(
+                                  height: 20,
+                                  child: Center(
+                                    child: Text(
+                                      'Unos uspio!',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          }).catchError((error) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 backgroundColor: Colors.grey,
