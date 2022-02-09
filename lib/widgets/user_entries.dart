@@ -109,13 +109,16 @@ class _UserEntriesState extends State<UserEntries> {
                               itemCount: results.length,
                               itemBuilder: (context, index) {
                                 return ListTile(
-                                  title: Text(results[index].raceClass),
-                                  leading: Text(
-                                    results[index].racePoints.toString(),
-                                  ),
+                                  tileColor: index.isEven
+                                      ? Colors.orange[200]
+                                      : Colors.white,
+                                  title: Text(
+                                      "${results[index].eventDate.day}.${results[index].eventDate.month}.${results[index].eventDate.year}. " +
+                                          results[index].raceClass),
                                   trailing: Text(
                                       results[index].racePosition.toString() +
-                                          '.'),
+                                          '. / ' +
+                                          results[index].racePoints.toString()),
                                 );
                               });
                         } else {
