@@ -1,0 +1,5 @@
+1. Rework entries and results in event screen to be displayed in ListView instead of DataTable.
+2. Create "Standings" where standings of the competitors in each class for the season will be displayed.
+3. Rework/expand event results to include more details about race (laps, time, time of best lap, points for both race 1 and race 2).
+4. Improve error handling.
+5. Write some unit tests. 
